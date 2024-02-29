@@ -21,6 +21,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
+    "server": "json-server ./server/data.json --port 8888",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -43,6 +44,7 @@
     ]
   },
   "devDependencies": {
-    "@craco/craco": "^7.1.0"
+    "@craco/craco": "^7.1.0",
+    "json-server": "^1.0.0-alpha.23"
   }
 }
