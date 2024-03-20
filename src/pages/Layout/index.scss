@@ -3,8 +3,11 @@
     position: fixed;
     top: 0;
     bottom: 50px;
+    background-color: var(--bgColor);
     width: 100%;
+    font-size: var(--fontSize);
   }
+
   .footer {
     position: fixed;
     bottom: 0;

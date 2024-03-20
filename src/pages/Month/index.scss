@@ -1,0 +1,15 @@
+.month {
+  height: 100%;
+
+  .tiltle {
+    text-align: center;
+    width: 100%;
+  }
+
+  .content {
+    // background-color: white;
+    height: calc(100% - 45px);
+    border-radius: 8px;
+    padding: 0 10px;
+  }
+}

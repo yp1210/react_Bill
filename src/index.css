@@ -12,6 +12,11 @@ code {
     monospace;
 }
 
+:root{
+  --bgColor: #daf2e1;
+  --fontSize: 16px;
+}
+
 :root:root {
   --adm-color-primary: rgb(105, 174, 120);
 }

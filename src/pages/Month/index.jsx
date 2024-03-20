@@ -1,10 +1,14 @@
 import React from 'react';
-import { Button } from 'antd-mobile';
+import { NavBar } from 'antd-mobile';
+import './index.scss';
+import Header from './Header';
 
 const Month = () => {
-  return <div>
-    this is month
-    <Button style={{'--background-color': 'blue', '--text-color': 'black'}} color='primary'>测试</Button>
+  return <div className='month'>
+    <NavBar back={null}>月度收支</NavBar>
+    <div className='content'>
+      <Header />
+    </div>
   </div>
 }
 
