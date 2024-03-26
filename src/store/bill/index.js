@@ -23,7 +23,7 @@ const { getBillList, setSelectMonth } = billStore.actions;
 // 获取账单
 const asyncGetBillList = () => {
   return async (dispatch) => {
-    const res = await axios.get('http://localhost:8888/ka');
+    const res = await axios.get('http://localhost:8889/ka');
     dispatch(getBillList(res.data))
   }
 }

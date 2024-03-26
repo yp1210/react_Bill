@@ -1,0 +1,19 @@
+.BillItem {
+  --ka-text-color: #888c98;
+  background-color: #ffffff;
+  padding: 15px 15px 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+
+  .BillItemHeader,
+  .BillItemContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 9px;
+  }
+
+  .BillItemHeader {
+    margin-bottom: 9px;
+  }
+}
