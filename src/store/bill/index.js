@@ -24,6 +24,10 @@ const { getBillList, setSelectMonth } = billStore.actions;
 const asyncGetBillList = () => {
   return async (dispatch) => {
     const res = await axios.get('http://localhost:8889/ka');
+    const billList = res.data || [];
+    billList.forEach(element => {
+      element.date = dayjs(element?.date).toJSON()
+    });
     dispatch(getBillList(res.data))
   }
 }
