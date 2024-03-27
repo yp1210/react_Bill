@@ -1,9 +1,6 @@
-.BillItem {
+.BillItemTop {
   --ka-text-color: #888c98;
-  background-color: #ffffff;
   padding: 15px 15px 10px 15px;
-  margin-bottom: 10px;
-  border-radius: 8px;
 
   .BillItemHeader,
   .BillItemContent {
@@ -16,4 +13,10 @@
   .BillItemHeader {
     margin-bottom: 9px;
   }
+}
+
+.BillItem {
+  margin-bottom: 10px;
+  border-radius: 8px;
+  background-color: #ffffff;
 }

@@ -27,8 +27,6 @@ const Header = () => {
     return newList;
   }, [currentMonthBill])
 
-  console.log(selectMonth, 'selectMonth', billList, billTotalList);
-
   return <div className='header'>
     <div onClick={() => { setVisible(items => !items) }}>
       <span className='headerDate'>2024-3月账单</span>

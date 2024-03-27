@@ -6,12 +6,13 @@ import { jsonDateToObj } from '@/utils/time';
 const Content = () => {
   const { selectMonth, billList, currentMonthBill } = useSelector(state => state.bill);
   // 当前选中的月份数据
-  console.log(currentMonthBill, 'MonthTotalBill');
+
+  
   const currentDayBill = useMemo(() => {
     const newList = currentMonthBill.reduce((total, cur) => {
       const { date, type, money } = cur || {};
       const findObj = total.find(items => jsonDateToObj(items.date).isSame(jsonDateToObj(date), 'day'));
-      console.log(cur, 'cur', findObj);
+      
       const items = {};
       if (!findObj) {
         items.date = jsonDateToObj(date).format('YYYY-MM-DD');
@@ -19,8 +20,8 @@ const Content = () => {
         items.income = type === 'income' ? money : 0;
         items.list = [cur];
         total.push(items);
-    } else {
-        findObj.pay = findObj.pay + (type === 'pay' ?  money : 0);
+      } else {
+        findObj.pay = findObj.pay + (type === 'pay' ? money : 0);
         findObj.income = findObj.income + (type === 'income' ? money : 0);
         findObj.list.push(cur);
       }
@@ -35,7 +36,7 @@ const Content = () => {
 
   const renderBillItem = () => {
     return currentDayBill.map((items, key) => {
-      return <BillItem key={`${key}_${items.id}`} item ={items}/>
+      return <BillItem key={`${key}_${items.id}`} item={items} showExpand/>
     })
   }
 
