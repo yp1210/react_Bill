@@ -9,13 +9,15 @@ import {
 import './index.scss';
 import { useDispatch } from 'react-redux'
 import { asyncGetBillList } from '@/store/bill';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Layout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const [key, setKey] = useState('');
 
+  console.log(pathname, pathname.replace(/\//, ''));
   const tabs = [
     {
       key: '',
@@ -37,6 +39,10 @@ const Layout = () => {
   useEffect(() => {
     dispatch(asyncGetBillList())
   }, [dispatch])
+
+  useEffect(() => {
+    setKey(pathname ? pathname.replace(/\//, '') : '')
+  }, [])
 
   const onChange = (key) => {
     setKey(key)

@@ -15,8 +15,13 @@ code {
 :root{
   --bgColor: #daf2e1;
   --fontSize: 16px;
+  /* form表单边框 */
+  --form-border-color: rgb(0, 0, 0);
+  --ka-bg-color: rgb(218, 242, 225);
+  --ka-color: rgb(105, 174, 120);
 }
 
 :root:root {
   --adm-color-primary: rgb(105, 174, 120);
+  --adm-button-text-color: rgb(0, 0, 0);
 }

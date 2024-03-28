@@ -65,6 +65,20 @@ const billListData = {
   ],
 }
 
+const buttonList = [
+  {
+    type: 'pay',
+    name: '支出',
+    isSelectd: true,
+  },
+  {
+    type: 'income',
+    name: '收入',
+    isSelectd: false,
+  }
+]
+
 export {
-  billListData
+  billListData,
+  buttonList
 }
