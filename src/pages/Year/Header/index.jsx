@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { DownOutline, UpOutline } from 'antd-mobile-icons'
 import { DatePicker } from 'antd-mobile'
 import './index.scss';
@@ -18,29 +18,26 @@ const Header = () => {
   useEffect(() => {
     dispatch(setSelectMonth({
       value: dayjs().toJSON(),
-      type: 'month'
+      type: 'year'
     }))
   }, [])
 
   const billTotalList = useMemo(() => {
-    const _list = JSON.parse(JSON.stringify(list))
     if(!currentMonthBill?.length) return list;
     const newList = currentMonthBill.reduce((total, cur) => {
       const obj = total?.find(items => items.type === cur.type);
       obj.count = obj?.count ? obj?.count + Number(cur?.money) : Number(cur?.money)
       return total;
-    }, _list);
+    }, list);
 
     newList[2].count = newList[1].count + newList[0].count;
 
     return newList;
   }, [currentMonthBill, selectMonth])
 
-  console.log(billTotalList, 'billTotalList',currentMonthBill, selectMonth);
-
-  return <div className='header'>
-    <div onClick={() => { setVisible(items => !items) }}>
-      <span className='headerDate'>{jsonDateToObj(selectMonth).format('YYYY-MM')}</span>
+  return <div className='yearHeader'>
+    <div className='headerWrap' onClick={() => { setVisible(items => !items) }}>
+      <span className='headerDate'>{jsonDateToObj(selectMonth).format('YYYY')}年</span>
       {!visible ? <DownOutline /> : <UpOutline />}
     </div>
     <div className='headerContent'>
@@ -54,11 +51,11 @@ const Header = () => {
         setVisible(false)
       }}
       max={now}
-      precision='month'
+      precision='year'
       onConfirm={val => {
         dispatch(setSelectMonth({
           value: val.toJSON(),
-          type: 'month'
+          type: 'year'
         }))
       }}
       value={jsonDateToObj(selectMonth)?.toDate()}

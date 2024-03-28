@@ -6,16 +6,16 @@ import { Empty } from 'antd-mobile';
 
 const Content = () => {
   const { currentMonthBill } = useSelector(state => state.bill);
-  // 当前选中的月份数据
 
+  // 当前选中的月份数据
   const currentDayBill = useMemo(() => {
     const newList = currentMonthBill.reduce((total, cur) => {
       const { date, type, money } = cur || {};
-      const findObj = total.find(items => jsonDateToObj(items.date).isSame(jsonDateToObj(date), 'day'));
-
+      const findObj = total.find(items => jsonDateToObj(items.date).isSame(jsonDateToObj(date), 'month'));
+      
       const items = {};
       if (!findObj) {
-        items.date = jsonDateToObj(date).format('YYYY-MM-DD');
+        items.date = jsonDateToObj(date).format('YYYY-MM');
         items.pay = type === 'pay' ? money : 0;
         items.income = type === 'income' ? money : 0;
         items.list = [cur];
@@ -43,7 +43,7 @@ const Content = () => {
       />
     }
     return currentDayBill.map((items, key) => {
-      return <BillItem key={`${key}_${items.id}`} item={items} showExpand />
+      return <BillItem key={`${key}_${items.id}`} item={items}/>
     })
   }
 

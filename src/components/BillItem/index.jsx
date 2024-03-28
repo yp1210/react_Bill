@@ -24,8 +24,8 @@ const BillItem = (props) => {
         {showExpand && <Icon type='arrowcircle' style={iconStyle} />}
       </div>
       <div className='BillItemContent'>
-        <span>支出{income}</span>
-        <span>收入{pay}</span>
+        <span>支出{pay}</span>
+        <span>收入{income}</span>
         <span>结余{balance}</span>
       </div>
     </div>

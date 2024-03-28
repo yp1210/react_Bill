@@ -15,11 +15,12 @@ const billStore = createSlice({
       state.billList = action.payload
     },
     setSelectMonth: (state, action) => {
-      state.selectMonth = action.payload;
+      const { value, type }  = action.payload || {};
+      state.selectMonth = value;
       // 当前选中的月份数据
-      const currentMonthBill = state.billList.filter(items => jsonDateToObj(items?.date)?.isSame(jsonDateToObj(action.payload), 'month'));
+      const currentMonthBill = state.billList.filter(items => jsonDateToObj(items?.date)?.isSame(jsonDateToObj(value), type));
       state.currentMonthBill = currentMonthBill;
-    }
+    },
   }
 })
 
