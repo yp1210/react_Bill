@@ -54,6 +54,7 @@ const New = () => {
       type,
       useFor,
     }))
+    navigate('/')
   }
 
   console.log(date);
