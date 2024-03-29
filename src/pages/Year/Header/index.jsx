@@ -12,7 +12,7 @@ import dayjs from 'dayjs';
 const Header = () => {
   const now = new Date()
   const [visible, setVisible] = useState(false);
-  const { selectMonth, currentMonthBill } = useSelector(state => state.bill);
+  const { selectMonth, currentMonthBill, billList } = useSelector(state => state.bill);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -20,17 +20,18 @@ const Header = () => {
       value: dayjs().toJSON(),
       type: 'year'
     }))
-  }, [])
+  }, [billList])
 
   const billTotalList = useMemo(() => {
-    if(!currentMonthBill?.length) return list;
+    const _list = JSON.parse(JSON.stringify(list))
+    if(!currentMonthBill?.length) return _list;
     const newList = currentMonthBill.reduce((total, cur) => {
       const obj = total?.find(items => items.type === cur.type);
       obj.count = obj?.count ? obj?.count + Number(cur?.money) : Number(cur?.money)
       return total;
-    }, list);
+    }, _list);
 
-    newList[2].count = newList[1].count + newList[0].count;
+    newList[2].count = newList[1].count || 0 + newList[0].count || 0;
 
     return newList;
   }, [currentMonthBill, selectMonth])

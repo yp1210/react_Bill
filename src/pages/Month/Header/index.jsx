@@ -26,18 +26,18 @@ const Header = () => {
 
   const billTotalList = useMemo(() => {
     const _list = JSON.parse(JSON.stringify(list))
-    if (!currentMonthBill?.length) return list;
+    console.log(currentMonthBill, 'currentMonthBill', _list, list);
+    if (!currentMonthBill?.length) return _list;
     const newList = currentMonthBill.reduce((total, cur) => {
       const obj = total?.find(items => items.type === cur.type);
       obj.count = obj?.count ? obj?.count + Number(cur?.money) : Number(cur?.money)
       return total;
     }, _list);
 
-    newList[2].count = newList[1].count + newList[0].count;
+    newList[2].count = newList[1].count || 0 + newList[0].count || 0;
 
     return newList;
   }, [currentMonthBill, selectMonth])
-
 
   return <div className='header'>
     <div onClick={() => { setVisible(items => !items) }}>

@@ -111,6 +111,13 @@
       "money": 5000,
       "type": "income",
       "useFor": "bonus"
+    },
+    {
+      "id": "76af",
+      "date": "2024-03-29T14:09:21.100Z",
+      "money": -12,
+      "type": "pay",
+      "useFor": "food"
     }
   ]
 }
