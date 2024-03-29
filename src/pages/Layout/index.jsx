@@ -7,7 +7,7 @@ import {
   UserOutline,
 } from 'antd-mobile-icons';
 import './index.scss';
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 import { asyncGetBillList } from '@/store/bill';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -17,7 +17,6 @@ const Layout = () => {
   const { pathname } = useLocation();
   const [key, setKey] = useState('');
 
-  console.log(pathname, pathname.replace(/\//, ''));
   const tabs = [
     {
       key: '',

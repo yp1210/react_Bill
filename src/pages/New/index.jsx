@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { NavBar, Button, Input, DatePicker } from 'antd-mobile';
+import { NavBar, Button, Input, DatePicker, Toast } from 'antd-mobile';
 import { useNavigate } from 'react-router-dom';
 import './index.scss';
 import { buttonList } from '@/constants/type';
@@ -7,6 +7,8 @@ import Icon from '@/components/Icon';
 import dayjs from 'dayjs';
 import TypeItem from '@/components/TypeItem';
 import { billListData } from '@/constants/type'
+import { useDispatch } from 'react-redux';
+import { saveBill as saveBillList } from '@/store/bill';
 
 const New = () => {
   const navigate = useNavigate();
@@ -14,7 +16,9 @@ const New = () => {
   const [money, setMoney] = useState('');
   const [date, setDate] = useState(dayjs().toJSON());
   const [visible, setVisible] = useState(false);
+  const [useFor, setUseFor] = useState('');
 
+  const dispatch = useDispatch();
 
   const _buttonList = useMemo(() => {
     buttonList.forEach(items => {
@@ -31,7 +35,25 @@ const New = () => {
   </Button>)
 
   const renderList = () => {
-    return billListData[type].map((items, index) => <TypeItem key={index} item={items} />)
+    return billListData[type].map((items, index) => <TypeItem onSelect={(val) => { setUseFor(val) }} key={index} item={items} type={useFor} />)
+  }
+
+  const saveBill = () => {
+    if (!money || !useFor) {
+      Toast.show({
+        content: '缺少必填字段',
+      })
+      return;
+    }
+    setDate(dayjs().toJSON())
+    setMoney('');
+    setUseFor('1')
+    dispatch(saveBillList({
+      date,
+      money: type === 'pay' ? -money : + money,
+      type,
+      useFor,
+    }))
   }
 
   console.log(date);
@@ -73,7 +95,9 @@ const New = () => {
       </div>
     </div>
     {renderList()}
-
+    <Button block color='primary' size='large' onClick={saveBill}>
+      记一笔
+    </Button>
   </div>
 }
 

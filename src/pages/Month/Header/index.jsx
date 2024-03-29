@@ -12,19 +12,21 @@ import dayjs from 'dayjs';
 const Header = () => {
   const now = new Date()
   const [visible, setVisible] = useState(false);
-  const { selectMonth, currentMonthBill } = useSelector(state => state.bill);
+  const { selectMonth, currentMonthBill, billList } = useSelector(state => state.bill);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setSelectMonth({
-      value: dayjs().toJSON(),
-      type: 'month'
-    }))
-  }, [])
+    if (billList?.length) {
+      dispatch(setSelectMonth({
+        value: dayjs().toJSON(),
+        type: 'month'
+      }))
+    }
+ }, [billList])
 
   const billTotalList = useMemo(() => {
     const _list = JSON.parse(JSON.stringify(list))
-    if(!currentMonthBill?.length) return list;
+    if (!currentMonthBill?.length) return list;
     const newList = currentMonthBill.reduce((total, cur) => {
       const obj = total?.find(items => items.type === cur.type);
       obj.count = obj?.count ? obj?.count + Number(cur?.money) : Number(cur?.money)
@@ -36,7 +38,6 @@ const Header = () => {
     return newList;
   }, [currentMonthBill, selectMonth])
 
-  console.log(billTotalList, 'billTotalList',currentMonthBill, selectMonth);
 
   return <div className='header'>
     <div onClick={() => { setVisible(items => !items) }}>

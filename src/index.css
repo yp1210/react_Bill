@@ -19,6 +19,7 @@ code {
   --form-border-color: rgb(0, 0, 0);
   --ka-bg-color: rgb(218, 242, 225);
   --ka-color: rgb(105, 174, 120);
+  --ka-border-color: rgb(25, 29, 38)
 }
 
 :root:root {

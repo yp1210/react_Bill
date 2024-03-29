@@ -21,10 +21,13 @@ const billStore = createSlice({
       const currentMonthBill = state.billList.filter(items => jsonDateToObj(items?.date)?.isSame(jsonDateToObj(value), type));
       state.currentMonthBill = currentMonthBill;
     },
+    addBillList: (state, action) => {
+      state.billList.push(action.payload);
+    },
   }
 })
 
-const { getBillList, setSelectMonth } = billStore.actions;
+const { getBillList, setSelectMonth, addBillList } = billStore.actions;
 
 // 获取账单
 const asyncGetBillList = () => {
@@ -38,5 +41,14 @@ const asyncGetBillList = () => {
   }
 }
 
+// 记一笔
+const saveBill = (date) => {
+  return async (dispatch) => {
+    const res = await axios.post('http://localhost:8889/ka', date)
+    const { status, data } = res || {};
+    dispatch(addBillList(data))
+  }
+}
+
 export default billStore.reducer;
-export { asyncGetBillList, setSelectMonth };
+export { asyncGetBillList, setSelectMonth, saveBill };
